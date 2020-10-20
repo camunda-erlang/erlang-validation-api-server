@@ -1,1 +1,78 @@
-
+swagger: '2.0'
+info:
+  description: A Simple List validation API
+  title: List validation
+  version: v1
+host: localhost:8001
+basePath: /validation
+schemes:
+  - http
+paths:
+  /subscription:
+    post:
+      summary: Validate subscription.
+      operationId: "validateSubscription"
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          description: Variables for validation.
+          schema:
+            $ref: '#/definitions/variables'
+      responses:
+        200:
+          description: Success response
+          schema:
+            type: object
+            properties:
+              status:
+                type: string
+                example: not listed
+        400:
+          description: Invalid Service Code
+        404:
+          description: Service Code not found 
+definitions:
+  variables:
+    type: object
+    properties:
+      msisdn:
+        type: object
+        properties:
+          value:
+            type: string
+          type:
+            type: string
+      service_code:
+        type: object
+        properties:
+          value:
+            type: string
+          type:
+            type: string
+      device_model_code:
+        type: object
+        properties:
+          value:
+            type: string
+          type:
+            type: string
+    required:
+      - msisdn
+      - service_code
+      - device_model_code
+    example:
+      msisdn: 
+        value: "94772354542"
+        type: string
+      service_code: 
+        value: "serviceWN100"
+        type: string
+      device_model_code:
+        value: "nova3i"
+        type: string
+      
+               

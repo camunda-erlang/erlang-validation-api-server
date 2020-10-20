@@ -1,1 +1,98 @@
-
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "A Simple List validation API",
+    "version" : "v1",
+    "title" : "List validation"
+  },
+  "host" : "localhost:8001",
+  "basePath" : "/validation",
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/subscription" : {
+      "post" : {
+        "summary" : "Validate subscription.",
+        "operationId" : "validateSubscription",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "body",
+          "description" : "Variables for validation.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/variables"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Success response",
+            "schema" : {
+              "$ref" : "#/definitions/inline_response_200"
+            }
+          },
+          "400" : {
+            "description" : "Invalid Service Code"
+          },
+          "404" : {
+            "description" : "Service Code not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "variables" : {
+      "type" : "object",
+      "required" : [ "device_model_code", "msisdn", "service_code" ],
+      "properties" : {
+        "msisdn" : {
+          "$ref" : "#/definitions/variables_msisdn"
+        },
+        "service_code" : {
+          "$ref" : "#/definitions/variables_msisdn"
+        },
+        "device_model_code" : {
+          "$ref" : "#/definitions/variables_msisdn"
+        }
+      },
+      "example" : {
+        "msisdn" : {
+          "value" : "94772354542",
+          "type" : "string"
+        },
+        "service_code" : {
+          "value" : "serviceWN100",
+          "type" : "string"
+        },
+        "device_model_code" : {
+          "value" : "nova3i",
+          "type" : "string"
+        }
+      }
+    },
+    "inline_response_200" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "type" : "string",
+          "example" : "not listed"
+        }
+      },
+      "example" : {
+        "status" : "not listed"
+      }
+    },
+    "variables_msisdn" : {
+      "type" : "object",
+      "properties" : {
+        "value" : {
+          "type" : "string"
+        },
+        "type" : {
+          "type" : "string"
+        }
+      }
+    }
+  }
+}

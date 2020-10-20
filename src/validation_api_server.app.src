@@ -1,1 +1,20 @@
-
+{application, validation_api_server, [
+    {description, "A Simple List validation API"},
+    {vsn, "1.0.0"},
+    {registered, []},
+    {applications, [
+        kernel,
+        stdlib,
+        ssl,
+        inets,
+        jsx,
+        jesse,
+        cowboy
+    ]},
+    {env, [
+    ]},
+	{mod, {swagger_app, []}},
+    {modules, []},
+    {licenses, []},
+    {links, []}
+]}.
